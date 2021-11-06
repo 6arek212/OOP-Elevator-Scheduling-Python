@@ -10,8 +10,20 @@
 ## Project Overview
 Giving a Bulding with elevators and a set of calls , the program needs to allocate the calls to the elevator in a way that minimize the waiting time
 
+</br>
+
+
+
+
+
+## Built With
+
+* Pycharm 
+* Python
 
 </br>
+
+
 
 ## Code of Conduct
 
@@ -38,3 +50,13 @@ Using a variation of **LOOK** algorithm in which the elevator keeps serving till
 </br>
 </br>
 <img src="https://www.engineering.columbia.edu/files/seas/styles/816x460/public/content/cs_image/2021/05/newtemplate.jpg?itok=PMitgeiw" width="600" height="400" />
+
+
+</br>
+</br>
+
+## Authors
+
+* **Tarik Husin**  - linkedin -> https://www.linkedin.com/in/tarik-husin-706754184/
+* **Wisam Kabaha**  - linkedin -> https://www.linkedin.com/in/tarik-husin-706754184/
+
