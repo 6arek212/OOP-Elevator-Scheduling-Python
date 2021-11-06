@@ -1,9 +1,10 @@
 # **Elevator Scheduling Algorithms**
 ![Builds](https://github.com/project-chip/connectedhomeip/workflows/Builds/badge.svg)
+#### A part of university assignment 
+
 
 </br>
 
-#### A part of university assignment 
 
 
 ## Project Overview
