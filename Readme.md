@@ -1,6 +1,6 @@
-# Elevator Scheduling Algorithms
+# **Elevator Scheduling Algorithms**
 
-## A university assignment 
+#### A part of university assignment 
 
 #### What is needed 
 - allocate calls algorithm 
