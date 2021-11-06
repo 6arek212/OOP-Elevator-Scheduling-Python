@@ -17,13 +17,15 @@ Giving a Bulding with elevators and a set of calls , the program needs to alloca
 
 #### What is needed 
 - allocate calls algorithm 
-- elevator movement 
+- elevator movement
+- elevator data structure 
 - use json files 
+- main function to spin the program 
 
 </br>
 
 #### About the allocation algorithm
-- Picking the elevator with the best time to get the given call 
+- Picking the elevator with the best time to get to the given call 
 - Round Robin (circle allocate)
 
 </br>
