@@ -19,15 +19,11 @@ Giving a Bulding with elevators and a set of calls , the program needs to alloca
 - elevator movement 
 - use json files 
 
-
-
-
+</br>
 #### About the allocation algorithm
 - Picking the elevator with the best time to get the given call 
 - Round Robin (circle allocate)
 
-
-
-
+</br>
 #### About elevator scheduling
 Using a variation of **LOOK** algorithm in which the elevator keeps serving till the last call then changes its direction 
