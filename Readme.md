@@ -13,7 +13,7 @@ Giving a Bulding with elevators and a set of calls , the program needs to alloca
 
 </br>
 
-## Our Responsibilities
+## Code of Conduct
 
 ### What is needed 
 - allocate calls algorithm 
