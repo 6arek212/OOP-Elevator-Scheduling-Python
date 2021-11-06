@@ -10,6 +10,10 @@ Giving a Bulding with elevators and a set of calls , the program needs to alloca
 
 
 
+
+# Implementation & What is need to be done
+
+
 #### What is needed 
 - allocate calls algorithm 
 - elevator movement 
