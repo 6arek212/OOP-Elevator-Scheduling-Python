@@ -13,9 +13,9 @@ Giving a Bulding with elevators and a set of calls , the program needs to alloca
 
 </br>
 
-## Implementation & What is need to be done
+## Our Responsibilities
 
-#### What is needed 
+### What is needed 
 - allocate calls algorithm 
 - elevator movement
 - elevator data structure 
@@ -24,13 +24,13 @@ Giving a Bulding with elevators and a set of calls , the program needs to alloca
 
 </br>
 
-#### About the allocation algorithm
+### About the allocation algorithm
 - Picking the elevator with the best time to get to the given call 
 - Round Robin (circle allocate)
 
 </br>
 
-#### About elevator scheduling
+### About elevator scheduling
 Using a variation of **LOOK** algorithm in which the elevator keeps serving till the last call then changes its direction 
 
 
