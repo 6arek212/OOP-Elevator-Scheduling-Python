@@ -30,7 +30,8 @@ Giving a Bulding with elevators and a set of calls , the program needs to alloca
 
 #### About elevator scheduling
 Using a variation of **LOOK** algorithm in which the elevator keeps serving till the last call then changes its direction 
-- `![](https://gyazo.com/eb5c5741b6a9a16c692170a41a49c858.png | width=100)`
+
+![](https://gyazo.com/eb5c5741b6a9a16c692170a41a49c858.png | width=100)
 
 
 ![alt text](https://www.engineering.columbia.edu/files/seas/styles/816x460/public/content/cs_image/2021/05/newtemplate.jpg?itok=PMitgeiw | width=100)
