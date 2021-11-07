@@ -1,4 +1,4 @@
-# **Elevator Scheduling Algorithms**
+# **Elevator Scheduling**
 ![Builds](https://github.com/project-chip/connectedhomeip/workflows/Builds/badge.svg)
 #### A part of university assignment 
 
@@ -25,7 +25,7 @@ Giving a Bulding with elevators and a set of calls , the program needs to alloca
 
 
 
-## Code of Conduct
+## Algorithms
 
 ### What is needed 
 - allocate calls algorithm 
