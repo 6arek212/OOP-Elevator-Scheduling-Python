@@ -58,5 +58,5 @@ Using a variation of **LOOK** algorithm in which the elevator keeps serving till
 ## Authors
 
 * **Tarik Husin**  - linkedin -> https://www.linkedin.com/in/tarik-husin-706754184/
-* **Wisam Kabha**  - linkedin -> https://www.linkedin.com/in/tarik-husin-706754184/
+* **Wisam Kabha**  - linkedin -> https://github.com/Wissam111
 
