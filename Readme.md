@@ -28,7 +28,7 @@ in a way that minimizes the avrage waiting time.
 
 ## How to RUN 
 In the cmd : 
-`Ex1 <Building.json> <Calls.csv> <output.csv>`
+`python Ex1.py B1.json C2.csv out.csv`
 
 
 
