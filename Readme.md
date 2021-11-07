@@ -10,6 +10,15 @@
 ## Project Overview
 Giving a Bulding with elevators and a set of calls , the program needs to allocate the calls to the elevator in a way that minimize the waiting time
 
+
+
+### What is needed 
+- allocate calls algorithm 
+- elevator movement
+- elevator data structure 
+- use json files 
+- main function to spin the program 
+
 </br>
 
 
@@ -25,25 +34,17 @@ Giving a Bulding with elevators and a set of calls , the program needs to alloca
 
 
 
-## Algorithms
+## Algorithm Breakdown
 
-### What is needed 
-- allocate calls algorithm 
-- elevator movement
-- elevator data structure 
-- use json files 
-- main function to spin the program 
 
-</br>
-
-### About the allocation algorithm
+### Allocation algorithm
 - Picking the elevator with the best time to get to the given call , taking in considiration the elevator current calls 
-- Round Robin (circle allocate)
+- For testing -> Round Robin (circular allocation)
 
 </br>
 
-### About elevator scheduling
-Using a variation of **LOOK** algorithm in which the elevator keep serving till the last call then changes its direction 
+### Elevator scheduling
+Idea : Keep moving in one direction until possible, then reverse direction 
 
 
 
