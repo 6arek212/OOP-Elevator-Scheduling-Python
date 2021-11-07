@@ -8,7 +8,8 @@
 
 
 ## Project Overview
-Giving a Bulding with elevators and a set of calls , the program needs to allocate the calls to the elevator in a way that minimize the waiting time
+Giving a Bulding with elevators and a set of calls , the program needs to allocate the calls to the elevators 
+in a way that minimizes the avrage waiting time.
 
 
 
