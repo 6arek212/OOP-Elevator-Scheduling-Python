@@ -37,13 +37,13 @@ Giving a Bulding with elevators and a set of calls , the program needs to alloca
 </br>
 
 ### About the allocation algorithm
-- Picking the elevator with the best time to get to the given call 
+- Picking the elevator with the best time to get to the given call , taking in considiration the elevator current calls 
 - Round Robin (circle allocate)
 
 </br>
 
 ### About elevator scheduling
-Using a variation of **LOOK** algorithm in which the elevator keeps serving till the last call then changes its direction 
+Using a variation of **LOOK** algorithm in which the elevator keep serving till the last call then changes its direction 
 
 
 
