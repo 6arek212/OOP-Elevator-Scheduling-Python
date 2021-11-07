@@ -59,5 +59,5 @@ Idea : Keep moving in one direction until possible, then reverse direction
 ## Authors
 
 * **Tarik Husin**  - linkedin -> https://www.linkedin.com/in/tarik-husin-706754184/
-* **Wisam Kabha**  - linkedin -> https://github.com/Wissam111
+* **Wisam Kabha**  - github -> https://github.com/Wissam111
 
