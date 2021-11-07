@@ -28,8 +28,12 @@ in a way that minimizes the avrage waiting time.
 
 ## How to RUN 
 In the cmd : 
+</br>
 `python Ex1.py B1.json C2.csv out.csv`
+</br>
 
+C2 - Elevator calls 
+B1 - Building
 
 
 ## Built With
