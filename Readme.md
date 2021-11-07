@@ -26,6 +26,12 @@ in a way that minimizes the avrage waiting time.
 
 
 
+## How to RUN 
+In the cmd : 
+`Ex1 <Building.json> <Calls.csv> <output.csv>`
+
+
+
 ## Built With
 
 * Pycharm 
