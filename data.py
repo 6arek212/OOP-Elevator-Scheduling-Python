@@ -19,11 +19,6 @@ def get_calls():
         reader = csv.reader(f)
         for row in reader:
             rows.append(row)
-
-    print(rows)
-
-
-
     return rows
 
 
