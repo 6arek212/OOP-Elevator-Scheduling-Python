@@ -21,6 +21,5 @@ def get_calls():
             rows.append(row)
     return rows
 
-'asdasdasdasdasdasd'
 
 get_calls()

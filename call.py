@@ -7,7 +7,7 @@ class Call:
     up = 1
     down = -1
 
-    def __init__(self, src :int, dest:int, type:int, time_coming:int):
+    def __init__(self, src: int, dest: int, type: int, time_coming: int):
         self.state = Call.init
         self.src = src
         self.dest = dest
@@ -17,6 +17,8 @@ class Call:
         self.time_going_src = -1
         self.time_going_dest = -1
         self.time_done = -1
+        self.allocated_to = None
+
 
     def get_time(self, state):
         if state == Call.init:
@@ -29,3 +31,6 @@ class Call:
             return self.going_to_dest
 
         return self.done
+
+    def allocated_to(self, elev):
+        self.allocated_to = elev
