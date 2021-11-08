@@ -8,8 +8,7 @@ def allocate_call():
 
 
 def move_elevators(elev: elevator, ds: ElevatorDS):
-    if elev.state == elevator.LEVEL:
-        elev.go_to(ds.get_next())
+    pass
 
 
 print(data.get_calls())
