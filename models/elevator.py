@@ -19,6 +19,10 @@ class Elevator:
         return f"id : {self.id} ,\n speed : {self.speed} ,\n min_floor : {self.min_floor} ," \
                f"\n max_floor:{self.max_floor}"
 
+    def __repr__(self):
+        return f"id : {self.id} ,\n speed : {self.speed} ,\n min_floor : {self.min_floor} ," \
+               f"\n max_floor:{self.max_floor}"
+
     def add_call(self, call):
         if self.start_direction is None:
             self.start_direction = call.direction
@@ -35,6 +39,7 @@ class Elevator:
             if not self.down_calls.__contains__(call.dest):
                 self.down_calls.append(call.dest)
             self.down_calls.sort()
+        print(f'{call.src} ---> {call.dest}  call got added to ', self.id)
 
     def time_up_calls(self, list):
         time = 0.0
@@ -78,7 +83,7 @@ class Elevator:
         new_calls.append(call.dest)
         new_calls.sort()
 
-        if self.start_direction == None:
+        if self.start_direction is None:
             time += self.close_time + self.start_time
             time += abs(call.src) / self.speed
             time += self.stop_time + self.open_time
@@ -99,7 +104,6 @@ class Elevator:
             time += self.time_down_calls(new_calls)
             time += self.time_up_calls(self.up_calls)
 
-        if time < self.time_to_finish_calls() :
-            raise Exception('error')
+        print(time, '-----------', self.time_to_finish_calls())
 
-        return time - self.time_to_finish_calls()
+        return time

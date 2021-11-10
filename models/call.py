@@ -1,6 +1,7 @@
 import csv
 from models.elevator import Elevator
 
+
 class Call:
 
     def __init__(self, src: int, dest: int, type: int, time_coming: float):
@@ -22,7 +23,7 @@ class Call:
         return f'src {self.src} ,dest {self.dest} , type {self.type}  , allocated_to {self.allocated_to}'
 
     def __repr__(self):
-        return f'{{ src {self.src} ,dest {self.dest} , type {self.type}  , allocated_to {self.allocated_to} }}'
+        return f'{{ src {self.src} ,dest {self.dest} , type {self.type}  , allocated_to {self.allocated_to} , time {self.time_coming} }}'
 
     def __dict__(self):
         return [
@@ -33,6 +34,9 @@ class Call:
             self.type,
             self.allocated_to
         ]
+
+    def __lt__(self, other):
+        return self.time_coming > other.time_coming
 
     @staticmethod
     def init_from_file(filepath):
