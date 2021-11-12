@@ -5,7 +5,7 @@ import json
 class Building:
     global _totalElev
 
-    def __init__(self, elevators: list, max_Floor, min_Floor):
+    def __init__(self, elevators, max_Floor, min_Floor):
         self.elevators = elevators
         self.max_Floor = max_Floor
         self.min_Floor = min_Floor
@@ -25,23 +25,28 @@ class Building:
     def building_F(filepath):
         with open(filepath, 'r') as f:
             buildings = json.load(f)
-
             max_floor = buildings['_maxFloor']
             min_floor = buildings['_minFloor']
             elevators = []
 
+            print(type(buildings))
             for e in buildings['_elevators']:
-                ele = {
-                    'min_floor': e['_minFloor'],
-                    'id': e['_id'],
-                    'speed': e['_speed'],
-                    'close_time': e['_closeTime'],
-                    'open_time': e['_openTime'],
-                    'start_time': e['_startTime'],
-                    'stop_time': e['_stopTime'],
-                    'max_floor': e['_maxFloor'],
-                }
+                # def __init__(self, id, speed, max_floor, min_floor, close_time, open_time, start_time, stop_time,
+                #              **kwargs):
+                ele = Elevator(e['_id'] ,e['_speed'] , e['_maxFloor'] , e['_minFloor'] ,  e['_closeTime'] , e['_openTime'] ,e['_stopTime'] , e['_stopTime'] )
 
+                # ele = {
+                #     'min_floor': e['_minFloor'],
+                #     'id': e['_id'],
+                #     'speed': e['_speed'],
+                #     'close_time': e['_closeTime'],
+                #     'open_time': e['_openTime'],
+                #     'start_time': e['_startTime'],
+                #     'stop_time': e['_stopTime'],
+                #     'max_floor': e['_maxFloor'],
+                # }
+                # print(ele)
+                # print(type(ele))
                 elevators.append(ele)
 
             building = Building(elevators, max_floor, min_floor)
@@ -85,9 +90,8 @@ if __name__ == '__main__':
     # print(ele["min_floor"])
     # print(building)
     # print(ele)
-    a = [2,4,5,6]
-    print(a[0])
-    print(building.elevators[1]['id'])
-    floors = Floors(building)
 
-    print(floors)
+    print(building.elevators[1])
+    # floors = Floors(building)
+    #
+    # print(floors)

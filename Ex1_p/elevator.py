@@ -19,8 +19,8 @@ class Elevator:
         self.Calls = []
 
     def __str__(self):
-        return f"id : {self.id} , speed : {self.speed} , min_floor : {self.min_floor} ," \
-               f" max_floor:{self.max_floor}"
+        return f"id : {self.id} , speed : {self.speed} , max_floor : {self.max_floor} ," \
+               f" min_floor:{self.min_floor}"
 
     def __repr__(self):
         return f"id : {self.id} , speed : {self.speed} , min_floor : {self.min_floor} ," \
