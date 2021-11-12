@@ -17,6 +17,12 @@ class Zone:
 
             return False
 
+
+    def __str__(self):
+        return f"Zone floors: {self.floors} , Zone elevators: {self.elevators} \n"
+    def __repr__(self):
+        return f"Zone floors: {self.floors} , Zone elevators: {self.elevators} \n"
+
     def bottomFloor(self):
         return self.floors[0].floor_Num
 
@@ -39,7 +45,8 @@ class Zoning:
         self.elevtoZone = []
         self.floors = Floors(building)
         floorPerZone = numofFloors / self.numofZones
-        spillPerFloor = (numofFloors / self.numofZones) - floorPerZone
+        spillPerFloor = (numofFloors / float(self.numofZones)) - floorPerZone
+
         totalSpill = 0
         handlefFloors = 0
 
@@ -50,8 +57,8 @@ class Zoning:
             elePerZone = building.numberOfElevetors() / self.numofZones
 
             totalSpill += spillPerFloor
-            minFloor = handlefFloors
-            maxFloor = handlefFloors + floorPerZone - 1
+            minFloor = int(handlefFloors)
+            maxFloor = int(handlefFloors + floorPerZone - 1)
 
             if totalSpill >= 1.0 - 0.00001:
                 totalSpill = max(0, totalSpill - 1.0)
@@ -59,30 +66,39 @@ class Zoning:
 
             for i in range(building.numberOfElevetors()):
                 ele = building.getElevator(i)
-                if ele['id'] >= zone * elePerZone and ele['id'] < (zone + 1) * elePerZone:
+                if ele.id >= zone * elePerZone and ele.id < (zone + 1) * elePerZone:
                     zoneEle.append(ele)
 
-            f = minFloor
-            m = maxFloor
-            while f <= m:
-                zoneFloors.append(self.floors[f])
-                f += 1
+            min = minFloor
+            max = maxFloor
+
+            while min<= max:
+                zoneFloors.append(self.floors.floors[min])
+                min+= 1
 
             handlefFloors += maxFloor - minFloor + 1
             self.zones.append(Zone(zoneFloors, zoneEle))
 
             a = 0
+            while a<len(zoneFloors):
+                zone = self.zones[len(self.zones) - 1]
+                self.floorToZone.insert(a,zone)
+                a+=1
 
-            for a in range(len(zoneFloors)):
-                self.floorToZone[i] = self.zones[len(self.zones) - 1]
-                i += 1
+
 
             for ele in zoneEle:
-                self.elevtoZone[ele['id']] = self.zones[len(self.zones) - 1]
+                zone = self.zones[len(self.zones) - 1]
+                self.elevtoZone.insert(ele.id , zone)
+
+
+
 
 
 if __name__ == '__main__':
-    building = Building.building_F("b1.txt")
+    building = Building.building_F("b2.txt")
     zoning = Zoning(building.numberOfElevetors() , building)
-    print(zoning)
+    for zone in zoning.zones:
+        print(zone)
+
 

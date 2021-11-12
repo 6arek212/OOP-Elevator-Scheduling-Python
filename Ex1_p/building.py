@@ -33,20 +33,9 @@ class Building:
             for e in buildings['_elevators']:
                 # def __init__(self, id, speed, max_floor, min_floor, close_time, open_time, start_time, stop_time,
                 #              **kwargs):
-                ele = Elevator(e['_id'] ,e['_speed'] , e['_maxFloor'] , e['_minFloor'] ,  e['_closeTime'] , e['_openTime'] ,e['_stopTime'] , e['_stopTime'] )
+                ele = Elevator(e['_id'], e['_speed'], e['_maxFloor'], e['_minFloor'], e['_closeTime'], e['_openTime'],
+                               e['_stopTime'], e['_stopTime'])
 
-                # ele = {
-                #     'min_floor': e['_minFloor'],
-                #     'id': e['_id'],
-                #     'speed': e['_speed'],
-                #     'close_time': e['_closeTime'],
-                #     'open_time': e['_openTime'],
-                #     'start_time': e['_startTime'],
-                #     'stop_time': e['_stopTime'],
-                #     'max_floor': e['_maxFloor'],
-                # }
-                # print(ele)
-                # print(type(ele))
                 elevators.append(ele)
 
             building = Building(elevators, max_floor, min_floor)
@@ -90,8 +79,17 @@ if __name__ == '__main__':
     # print(ele["min_floor"])
     # print(building)
     # print(ele)
+    ls = [12, 23, 22, 22]
 
-    print(building.elevators[1])
+    a = 0
+    while a < 4:
+        print(2)
+        ls[a] = a
+        a += 1
+
+    #
+    # print(building.elevators[1])
     # floors = Floors(building)
     #
-    # print(floors)
+    #
+    # print(floors.floors[0])

@@ -13,9 +13,9 @@ class Call:
         self.time_coming = time_coming
 
         if src >= dest:
-            self._direction = Call.DOWN
+            self.direction = Call.DOWN
         else:
-            self._direction = Call.UP
+            self.direction = Call.UP
 
     def __str__(self):
         return f"Elevator call, src: {self.src} ,  dest: {self.dest} , type: {self.type} , time_coming: {self.time_coming}\n"

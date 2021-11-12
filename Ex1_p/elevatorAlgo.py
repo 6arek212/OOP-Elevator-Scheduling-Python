@@ -1,8 +1,9 @@
 import building as Building
 from elevator import Elevator
 from call import Call
-
+import csv
 if __name__ == '__main__':
+
     building = Building.building_F("b1.txt")
     calls = Call.call_F("c1.text")
     n = 0
@@ -26,8 +27,8 @@ if __name__ == '__main__':
 
     def alloc_cost(self, call: Call):
 
-        _reqFloor = call.getDest()
-        _dir = call.getDir()
+        req_Floor = call.dest
+        dir = call.direction
         if self.direction == 1:
             if self.currFloor > _reqFloor or _dir == -1:
                 return self._maxFloor - self.currFloor + self._maxFloor - _reqFloor
@@ -60,3 +61,21 @@ if __name__ == '__main__':
                 return self.currFloor - 1 + _reqFloor - 1
         else:
             return abs(self.currFloor - _reqFloor)
+
+
+
+    for call in calls:
+        print(call.time_coming)
+        call.allocated_to = round_robin()
+
+    # for el in building.elevators:
+    #     print('------------')
+    #     print(f'time {el.time_to_finish_calls()}')
+    #     print(el.up_calls)
+    #     print(el.down_calls)
+    #     print('------------')
+
+    with open('./out.csv', 'w', newline='') as f:
+        csv_writer = csv.writer(f)
+        for call in calls:
+            csv_writer.writerow(call.__dict__())
