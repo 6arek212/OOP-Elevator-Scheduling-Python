@@ -30,6 +30,8 @@ if __name__ == '__main__':
         print('----------------------------------------')
         return picked
 
+    calls.sort()
+
 
     for call in calls:
         print(call.time_coming)

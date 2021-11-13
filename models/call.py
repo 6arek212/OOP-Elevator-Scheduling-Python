@@ -36,7 +36,7 @@ class Call:
         ]
 
     def __lt__(self, other):
-        return self.time_coming > other.time_coming
+        return abs(self.src) < abs(other.src)
 
     @staticmethod
     def init_from_file(filepath):
