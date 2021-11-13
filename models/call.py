@@ -10,9 +10,6 @@ class Call:
         self.type = type
         self.allocated_to = -1
         self.time_coming = time_coming
-        self.time_going_src = -1
-        self.time_going_dest = -1
-        self.time_done = -1
         self.allocated_to = -1
         if src <= dest:
             self.direction = Elevator.UP
@@ -36,7 +33,7 @@ class Call:
         ]
 
     def __lt__(self, other):
-        return abs(self.src) < abs(other.src)
+        return self.time_coming < other.time_coming
 
     @staticmethod
     def init_from_file(filepath):
