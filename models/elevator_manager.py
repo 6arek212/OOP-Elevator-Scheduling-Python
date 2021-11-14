@@ -20,27 +20,35 @@ class ElevatorManager:
     def get_next_call(self):
         pass
 
-    def sim(self, call):
+    def elevator_status_at(self, time):
+        ':returns (currnet_up_calls , currnet_down_calls , elevator_pos)      '
+
+    def estimated_time_to(self, call):
+        (up_calls, down_calls, elv_pos, going_to) = self.elevator_status_at(call.time_coming)
         time = 0
+        if going_to is None:
+            time += self.elevator.close_time + self.elevator.stop_time
+            time += abs(elv_pos - call.src) / self.elevator.speed
+            time += self.elevator.close_time + self.elevator.start_time
 
-        while time < call.time_coming:
-            'must be on a spread thread'
-            self.elevator.go_to(self.get_next_call())
+            time += self.elevator.close_time + self.elevator.stop_time
+            time += abs(call.src - call.src) / self.elevator.speed
+            time += self.elevator.close_time + self.elevator.start_time
+            return time
 
-        'can pick it up'
-        if call.direction == Elevator.UP and self.elevator.state == Elevator.UP and self.elevator.position <= call.src:
+        direction = Elevator.UP if elv_pos <= going_to else Elevator.DOWN
+
+        if direction == Elevator.UP and call.direction == Elevator.UP:
             pass
 
-        if call.direction == Elevator.DOWN and self.elevator.state == Elevator.DOWN and self.elevator.position >= call.src:
+        if direction == Elevator.DOWN and call.direction == Elevator.UP:
             pass
 
-        if self.elevator.going_to is None:
-            time = self.elevator.close_time + self.elevator.start_time
-            time += abs(self.elevator.position - call.src) / self.elevator.speed
-            time += self.elevator.stop_time + self.elevator.open_time
+        if direction == Elevator.DOWN and call.direction == Elevator.DOWN:
+            pass
 
-            time = self.elevator.close_time + self.elevator.start_time
-            time += abs(self.elevator.position - call.dest) / self.elevator.speed
-            time += self.elevator.stop_time + self.elevator.open_time
+        if direction == Elevator.UP and call.direction == Elevator.DOWN:
+            pass
+
 
         return time
