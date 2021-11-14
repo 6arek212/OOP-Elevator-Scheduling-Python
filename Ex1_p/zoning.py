@@ -1,3 +1,5 @@
+import math
+
 from building import Building
 from building import Floors
 from building import Floor
@@ -17,9 +19,9 @@ class Zone:
 
             return False
 
-
     def __str__(self):
         return f"Zone floors: {self.floors} , Zone elevators: {self.elevators} \n"
+
     def __repr__(self):
         return f"Zone floors: {self.floors} , Zone elevators: {self.elevators} \n"
 
@@ -44,17 +46,17 @@ class Zoning:
         self.floorToZone = []
         self.elevtoZone = []
         self.floors = Floors(building)
-        floorPerZone = numofFloors / self.numofZones
-        spillPerFloor = (numofFloors / float(self.numofZones)) - floorPerZone
+        floorPerZone =  int(numofFloors / self.numofZones)
+        spillPerFloor = ((numofFloors / float(self.numofZones)) - floorPerZone)
 
         totalSpill = 0
-        handlefFloors = 0
+        handlefFloors:int = 0
 
         for zone in range(self.numofZones):
             zoneEle = []
             zoneFloors = []
 
-            elePerZone = building.numberOfElevetors() / self.numofZones
+            elePerZone = int(building.numberOfElevetors() / self.numofZones)
 
             totalSpill += spillPerFloor
             minFloor = int(handlefFloors)
@@ -70,35 +72,29 @@ class Zoning:
                     zoneEle.append(ele)
 
             min = minFloor
-            max = maxFloor
-
-            while min<= max:
+            while min <= maxFloor:
                 zoneFloors.append(self.floors.floors[min])
-                min+= 1
+                min += 1
+
 
             handlefFloors += maxFloor - minFloor + 1
             self.zones.append(Zone(zoneFloors, zoneEle))
 
             a = 0
-            while a<len(zoneFloors):
+            while a < len(zoneFloors):
                 zone = self.zones[len(self.zones) - 1]
-                self.floorToZone.insert(a,zone)
-                a+=1
-
+                self.floorToZone.insert(a, zone)
+                a += 1
 
 
             for ele in zoneEle:
                 zone = self.zones[len(self.zones) - 1]
-                self.elevtoZone.insert(ele.id , zone)
-
-
-
+                self.elevtoZone.insert(ele.id, zone)
 
 
 if __name__ == '__main__':
-    building = Building.building_F("b2.txt")
-    zoning = Zoning(building.numberOfElevetors() , building)
+    building = Building.building_F("b3.txt")
+
+    zoning = Zoning(building.numberOfElevetors(), building)
     for zone in zoning.zones:
         print(zone)
-
-

@@ -1,7 +1,7 @@
 from elevator import Elevator
 import json
-
-
+import math
+import sys
 class Building:
     global _totalElev
 
@@ -16,12 +16,13 @@ class Building:
     def __repr__(self):
         return f"elevators : {self.elevators} , max_floor : {self.max_Floor} , min_floor : {self.min_Floor}"
 
-    def getElevator(self, i):
+    def getElevator(self, i) -> Elevator:
         return self.elevators[i]
 
     def numberOfElevetors(self):
         return len(self.elevators)
 
+    @staticmethod
     def building_F(filepath):
         with open(filepath, 'r') as f:
             buildings = json.load(f)
@@ -79,15 +80,12 @@ if __name__ == '__main__':
     # print(ele["min_floor"])
     # print(building)
     # print(ele)
-    ls = [12, 23, 22, 22]
 
-    a = 0
-    while a < 4:
-        print(2)
-        ls[a] = a
-        a += 1
-
-    #
+    print(math.ceil(4.3))
+    print(building.getElevator(0))
+    print(sys.maxsize)
+    for i in range(10):
+        print(i)
     # print(building.elevators[1])
     # floors = Floors(building)
     #

@@ -14,9 +14,28 @@ class Elevator:
         self.open_time = open_time
         self.start_time = start_time
         self.stop_time = stop_time
-        self.direction = Elevator.UP
+        self.direction = None
         self.currFloor = 0
-        self.Calls = []
+        self.up_calls = []
+        self.down_calls = []
+
+    def add_call(self, call):
+        if self.direction is None:
+            self.direction = call.direction
+
+        if call.direction == Elevator.UP:
+            if not self.up_calls.__contains__(call.src):
+                self.up_calls.append(call.src)
+            if not self.up_calls.__contains__(call.dest):
+                self.up_calls.append(call.dest)
+            self.up_calls.sort()
+        else:
+            if not self.down_calls.__contains__(call.src):
+                self.down_calls.append(call.src)
+            if not self.down_calls.__contains__(call.dest):
+                self.down_calls.append(call.dest)
+            self.down_calls.sort()
+        print(f'{call.src} ---> {call.dest}  call got added to ', self.id)
 
     def __str__(self):
         return f"id : {self.id} , speed : {self.speed} , max_floor : {self.max_floor} ," \

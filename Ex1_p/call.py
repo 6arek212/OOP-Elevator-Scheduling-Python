@@ -11,6 +11,7 @@ class Call:
         self.dest = dest
         self.type = type
         self.time_coming = time_coming
+        self.allocTo = -1
 
         if src >= dest:
             self.direction = Call.DOWN
@@ -18,10 +19,10 @@ class Call:
             self.direction = Call.UP
 
     def __str__(self):
-        return f"Elevator call, src: {self.src} ,  dest: {self.dest} , type: {self.type} , time_coming: {self.time_coming}\n"
+        return f"Elevator call, src: {self.src} ,  dest: {self.dest} , type: {self.type} , time_coming: {self.time_coming} , allocTo : {self.allocTo}\n"
 
     def __repr__(self):
-        return f"Elevator call, src: {self.src} ,  dest: {self.dest} , type: {self.type} , time_coming: {self.time_coming}\n"
+        return f"Elevator call, src: {self.src} ,  dest: {self.dest} , type: {self.type} , time_coming: {self.time_coming} , allocTo : {self.allocTo}\n"
 
     def call_F(file_name):
         calls = []
@@ -37,6 +38,16 @@ class Call:
             calls.append(c)
 
         return calls
+
+    def __dict__(self):
+        return [
+            'Elevator call',
+            self.time_coming,
+            self.src,
+            self.dest,
+            self.type,
+            self.allocTo
+        ]
 
 
 if __name__ == '__main__':
