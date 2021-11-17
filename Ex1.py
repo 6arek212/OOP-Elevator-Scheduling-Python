@@ -52,7 +52,7 @@ if __name__ == '__main__':
 
         print('Done')
 
-        with open(f'./{out_file_name}', 'w', newline='') as f:
+        with open(f'./{out_file_name}.csv', 'w', newline='') as f:
             csv_writer = csv.writer(f)
             for call in calls:
                 csv_writer.writerow(call.__dict__())
