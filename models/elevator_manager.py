@@ -1,162 +1,206 @@
 import sys
 
 from .elevator import Elevator
+from models.simulator import simulator
+from models.call import Call
 
 
 class ElevatorManager:
     def __init__(self, elevator: Elevator):
         self.elevator = elevator
-        self.start_direction = None
         self.calls = []
+        self.active_calls = []
+        self.up_calls = []
+        self.down_calls = []
+        self.start_direction = None
+        self.direction = Elevator.LEVEL
+        self.elv_pos = 0
+        self.going_to = None
+        self.to_dst = None
 
     def add_call(self, call):
+        self.calls.append(call)
         if self.start_direction is None:
             self.start_direction = call.direction
-        self.calls.append(call)
-        print(f'{call.src} ---> {call.dest}  call got added to ', self.elevator.id)
-
-    def has_up_calls(self, calls, time):
-        for c in calls:
-            if c.direction == Elevator.UP and c.time_coming <= time:
-                return True
-        return False
-
-    def has_down_calls(self, calls, time):
-        for c in calls:
-            if c.direction == Elevator.DOWN and c.time_coming <= time:
-                return True
-        return False
-
-    def get_next_call(self, calls, elevator_pos, direction, time):
-        if len(calls) == 0:
-            return sys.maxsize
-
-        if direction == Elevator.UP:
-            for c in calls:
-                if elevator_pos > c.dest and time > c.time_coming:
-                    calls.remove(c)
 
 
-            min = []
-            for c in calls:
-                if c.direction == Elevator.UP and time > c.time_coming:
-                    min.append(c.src)
-                    min.append(c.dest)
-            min.sort()
 
-            if len(min) == 0:
-                return sys.maxsize
+    def add(self, list, v):
+        if not list.__contains__(v):
+            list.append(v)
 
-            while min[0] < elevator_pos:
-                min.remove(0)
+    def add_call_2(self, c: Call):
+        if not self.active_calls and not self.up_calls and not self.down_calls:
+            self.add(self.active_calls, c.src)
+            self.add(self.active_calls, c.dest)
+            print(f'a call got added {c.src} ---> {c.dest}')
+            return
+
+        if c.direction == Elevator.UP and self.direction == Elevator.UP and self.elv_pos <= c.src:
+            self.add(self.active_calls, c.src)
+            self.add(self.active_calls, c.dest)
+
+        elif c.direction == Elevator.DOWN and self.direction == Elevator.DOWN and self.elv_pos >= c.src:
+            self.add(self.active_calls, c.src)
+            self.add(self.active_calls, c.dest)
 
 
-            return min[0]
+        elif c.direction == Elevator.UP:
+            self.add(self.up_calls, c.src)
+            self.add(self.up_calls, c.dest)
 
+        elif c.direction == Elevator.DOWN:
+            self.add(self.down_calls, c.src)
+            self.add(self.down_calls, c.dest)
+
+        if self.direction == Elevator.UP:
+            self.active_calls.sort()
         else:
-            for c in calls:
-                if elevator_pos < c.dest and time > c.time_coming:
-                    calls.remove(c)
+            self.active_calls.sort(reverse=True)
 
-            min = []
-            for c in calls:
-                if c.direction == Elevator.DOWN and time > c.time_coming:
-                    min.append(c.src)
-                    min.append(c.dest)
-            min.sort()
-            if len(min) == 0:
-                return sys.maxsize
+        print(f'a call got added {c.src} ---> {c.dest}')
 
-            while min[0] < elevator_pos:
-                min.remove(0)
+        self.up_calls.sort()
+        self.down_calls.sort(reverse=True)
 
-            return min[0]
+    def feed_calls(self):
+        if self.direction == Elevator.UP and not self.active_calls:
 
-    def elevator_status_at(self, time):
-        ':returns (currnet_up_calls , currnet_down_calls , elevator_po'
-        current_calls = []
+            if self.down_calls and self.down_calls[0] > self.elv_pos:
+                self.add(self.active_calls, self.down_calls[0])
 
-        for call in self.calls:
-            if call.time_coming < time:
-                current_calls.append(call)
+            elif self.down_calls and self.down_calls[0] <= self.elv_pos:
+                self.active_calls = self.down_calls
+                self.down_calls = []
+                self.direction = Elevator.DOWN
 
-        current_pos = 0
-        t = 0
+            elif not self.down_calls:
+                if self.up_calls and self.up_calls[0] < self.elv_pos:
+                    self.add(self.active_calls, self.up_calls[0])
+                elif self.up_calls and self.up_calls[0] >= self.elv_pos:
+                    self.active_calls = self.up_calls
+                    self.up_calls = []
+                    self.direction = Elevator.UP
 
-        go_to = self.get_next_call(current_calls, 0, self.start_direction, t)
-        while t < time and self.has_up_calls(current_calls, t) or self.has_down_calls(
-                current_calls, t):
-            t += self.elevator.close_time + self.elevator.stop_time
-            t += abs(current_pos - go_to) / self.elevator.speed
-            t += self.elevator.close_time + self.elevator.start_time
-            current_pos = go_to
 
-            if self.has_up_calls(current_calls, t):
-                go_to = self.get_next_call(current_calls, current_pos, Elevator.UP, t)
 
-            elif self.has_down_calls(current_calls, t):
-                go_to = self.get_next_call(current_calls, current_pos, Elevator.DOWN, t)
+        elif not self.active_calls:
+            if self.up_calls and self.up_calls[0] < self.elv_pos:
+                self.add(self.active_calls, self.up_calls[0])
+            elif self.up_calls and self.up_calls[0] >= self.elv_pos:
+                self.active_calls = self.up_calls
+                self.up_calls = []
+                self.direction = Elevator.UP
+
+            elif not self.up_calls:
+                if self.down_calls and self.down_calls[0] > self.elv_pos:
+                    self.add(self.active_calls, self.down_calls[0])
+
+                elif self.down_calls and self.down_calls[0] <= self.elv_pos:
+                    self.active_calls = self.down_calls
+                    self.down_calls = []
+                    self.direction = Elevator.DOWN
+
+    def get_next(self):
+        while  self.active_calls and self.active_calls[0] == self.elv_pos:
+            self.active_calls.pop(0)
+
+        if not self.active_calls:
+            if self.to_dst is not None:
+                self.add(self.active_calls, self.to_dst)
+                self.to_dst =  None
             else:
-                t += 1
+                self.feed_calls()
 
-        return (current_calls,current_pos, go_to)
+        while  self.active_calls and self.active_calls[0] == self.elv_pos:
+            self.active_calls.pop(0)
 
-    def time_up_calls(self, current_pos, up_calls):
+        if not self.active_calls:
+            self.direction = Elevator.LEVEL
+            return None
+
+        if self.elv_pos >= self.active_calls[0]:
+            self.direction = Elevator.DOWN
+        else:
+            self.direction = Elevator.UP
+
+        print(f'next is {self.active_calls[0]} direction {self.direction}')
+        return self.active_calls.pop(0)
+
+
+
+    def calculate_time(self, c):
+        is_moving = False
+        if self.going_to is not None:
+            is_moving = True
+        #     self.add(self.active_calls,self.going_to)
+        #     if self.direction == Elevator.UP:
+        #         self.active_calls.sort()
+        #     else:
+        #         self.active_calls.sort(reverse=True)
+
+
+        print('-----')
+        print(self.active_calls)
+        print(self.up_calls)
+        print(self.down_calls)
+        print('-----')
+
         time = 0
-        for c in up_calls:
-            time += self.elevator.close_time + self.elevator.stop_time
-            time += abs(current_pos - c) / self.elevator.speed
+        next = self.get_next()
+
+        while next is not None:
+
+            if time == 0 and not is_moving:
+                time += self.elevator.close_time + self.elevator.stop_time
+            time += abs(self.elv_pos - next) / self.elevator.speed
             time += self.elevator.close_time + self.elevator.start_time
-            current_pos = c
+            self.elv_pos = next
+            next = self.get_next()
+            is_moving = False
+
         return time
 
-    def time_down_calls(self, current_pos, up_calls):
-        time = 0
-        for c in up_calls:
-            time += self.elevator.close_time + self.elevator.stop_time
-            time += abs(current_pos - c) / self.elevator.speed
-            time += self.elevator.close_time + self.elevator.start_time
-            current_pos = c
-        return time
 
-    def calculate_time(self, calls, going_to, direction, elevator_pos):
-        call_up = []
-        call_down = []
 
-        for c in calls:
-            if c.direction == Elevator.UP:
-                call_up.append(c.src)
-                call_up.append(c.dest)
-            else:
-                call_down.append(c.src)
-                call_down.append(c.dest)
 
-        if direction == Elevator.UP:
-            call_up.append(going_to)
-            call_up.sort()
-            return self.time_up_calls(elevator_pos, call_up) + self.time_down_calls(elevator_pos, call_down)
-        else:
-            call_down.append(going_to)
-            call_down.sort(reverse=True)
-            return self.time_down_calls(elevator_pos, call_down) + self.time_up_calls(elevator_pos, call_up)
-
-    def estimated_time_to(self, call):
-        (calls, elv_pos, going_to) = self.elevator_status_at(call.time_coming)
-
-        print('current elevator calls',calls)
-
-        if going_to is None:
+    def estimated_time_to(self, c):
+        if self.start_direction is None:
             time = 0
             time += self.elevator.close_time + self.elevator.stop_time
-            time += abs(elv_pos - call.src) / self.elevator.speed
+            time += abs(self.elv_pos - c.src) / self.elevator.speed
             time += self.elevator.close_time + self.elevator.start_time
 
             time += self.elevator.close_time + self.elevator.stop_time
-            time += abs(call.src - call.src) / self.elevator.speed
+            time += abs(c.src - c.src) / self.elevator.speed
             time += self.elevator.close_time + self.elevator.start_time
             return time
 
-        direction = Elevator.UP if elv_pos <= going_to else Elevator.DOWN
-        time = self.calculate_time(calls, going_to, direction, elv_pos)
-        print(time)
-        return time
+
+        self.start_simulate(c.time_coming)
+
+        if self.going_to is None:
+            time = 0
+            time += self.elevator.close_time + self.elevator.stop_time
+            time += abs(self.elv_pos - c.src) / self.elevator.speed
+            time += self.elevator.close_time + self.elevator.start_time
+
+            time += self.elevator.close_time + self.elevator.stop_time
+            time += abs(c.src - c.src) / self.elevator.speed
+            time += self.elevator.close_time + self.elevator.start_time
+            return time
+
+        self.add_call_2(c)
+
+        return self.calculate_time(c)
+
+    def start_simulate(self, time):
+        s = simulator(self.elevator)
+        (active_calls, down_calls, up_calls, elv_pos, going_to, direction) = s.get_elevator_state_at(time, self.calls)
+        self.active_calls = active_calls
+        self.down_calls = down_calls
+        self.up_calls = up_calls
+        self.elv_pos = elv_pos
+        self.going_to = going_to
+        self.direction = direction
+        print('simulation result -> ',active_calls,down_calls,up_calls,elv_pos,going_to,direction)

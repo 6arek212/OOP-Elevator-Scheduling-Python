@@ -11,6 +11,7 @@ class Call:
         self.allocated_to = -1
         self.time_coming = time_coming
         self.allocated_to = -1
+        self.picked = False
         if src <= dest:
             self.direction = Elevator.UP
         else:
