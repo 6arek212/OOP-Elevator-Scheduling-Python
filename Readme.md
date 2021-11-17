@@ -33,7 +33,7 @@ in a way that minimizes the average waiting time.
 
 `In the cmd : `
 
-`python Ex1.py B1.json C2.csv out.csv`
+    python Ex1.py B1.json C2.csv out.csv
 </br>
 
 
@@ -41,7 +41,14 @@ in a way that minimizes the average waiting time.
 </br>
 **B1 - Building json file**
 
-`example: python3 Ex1.py B5.json Calls_d.csv out_file`
+    example: python3 Ex1.py B5.json Calls_d.csv out_file
+
+</br>
+
+## Test Results
+    `java -jar Ex1_checker_V1.2_obf.jar 1111,2222,3333 B2.json Ex1_Calls_case_2_b.csv out.log`
+
+
 
 </br>
 
