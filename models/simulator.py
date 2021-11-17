@@ -8,239 +8,131 @@ class simulator:
     def __init__(self, elevator):
         self.elevator = elevator
         self.elevator_pos = 0
-        self.elevator_mode = Elevator.LEVEL
         self.direction = Elevator.LEVEL
-        # self.active_calls = []
-        # self.up_calls = []
-        # self.down_calls = []
         self.calls = []
+        self.time = 0
 
-        self.to_dst = None
+    def add(self, c: Call):
+        # print(f'call got added {c.src} --> {c.dest}  direction {c.direction}')
+        if self.direction == Elevator.LEVEL:
+            if c.src == self.elevator_pos:
+                self.direction = c.direction
+            if c.src > self.elevator_pos:
+                self.direction = Elevator.UP
+            else:
+                self.direction = Elevator.DOWN
+        self.calls.append(c)
 
+    def get_next_up_calls(self, elv_pos=None):
+        for c in self.calls:
+            if c.direction == Elevator.UP and c.src == self.elevator_pos:
+                c.picked = True
+                c.src_time = self.time
 
-    def add(self , call:Call):
-        self.calls.append(call)
-
-
-
-    # def add(self, list, v):
-    #     if not list.__contains__(v):
-    #         list.append(v)
-    #
-    # def add_call_to_active(self, c: Call):
-    #     # print(f'a call got added {c.src} ---> {c.dest}  direction {c.direction}')
-    #     if not self.active_calls and not self.up_calls and not self.down_calls:
-    #         if c.src == self.elevator_pos:
-    #             self.direction = c.direction
-    #         if c.src > self.elevator_pos:
-    #             self.direction = Elevator.UP
-    #         else:
-    #             self.direction = Elevator.DOWN
-    #
-    #         if self.direction != c.direction:
-    #             self.add(self.active_calls, c.src)
-    #             self.to_dst = c.dest
-    #
-    #         else:
-    #             self.add(self.active_calls, c.src)
-    #             self.add(self.active_calls, c.dest)
-    #
-    #
-    #
-    #         if self.direction == Elevator.UP:
-    #             self.active_calls.sort()
-    #         else:
-    #             self.active_calls.sort(reverse=True)
-    #
-    #         self.up_calls.sort()
-    #         self.down_calls.sort(reverse=True)
-    #         return
-    #
-    #
-    #     if c.direction == Elevator.UP and self.direction == Elevator.UP and self.elevator_pos <= c.src:
-    #         self.add(self.active_calls, c.src)
-    #         self.add(self.active_calls, c.dest)
-    #
-    #     elif c.direction == Elevator.DOWN and self.direction == Elevator.DOWN and self.elevator_pos >= c.src:
-    #         self.add(self.active_calls, c.src)
-    #         self.add(self.active_calls, c.dest)
-    #
-    #
-    #     elif c.direction == Elevator.UP:
-    #         self.add(self.up_calls, c.src)
-    #         self.add(self.up_calls, c.dest)
-    #
-    #     elif c.direction == Elevator.DOWN:
-    #         self.add(self.down_calls, c.src)
-    #         self.add(self.down_calls, c.dest)
-    #
-    #     if self.direction == Elevator.UP:
-    #         self.active_calls.sort()
-    #     else:
-    #         self.active_calls.sort(reverse=True)
-    #
-    #     self.up_calls.sort()
-    #     self.down_calls.sort(reverse=True)
-
-    # def feed_calls(self):
-    #     if self.direction == Elevator.UP and not self.active_calls:
-    #
-    #         if self.down_calls and self.down_calls[0] > self.elevator_pos:
-    #             self.add(self.active_calls, self.down_calls[0])
-    #
-    #         elif self.down_calls and self.down_calls[0] <= self.elevator_pos:
-    #             self.active_calls = self.down_calls
-    #             self.down_calls = []
-    #             self.direction = Elevator.DOWN
-    #
-    #         elif not self.down_calls:
-    #             if self.up_calls and self.up_calls[0] < self.elevator_pos:
-    #                 self.add(self.active_calls, self.up_calls[0])
-    #             elif self.up_calls and self.up_calls[0] >= self.elevator_pos:
-    #                 self.active_calls = self.up_calls
-    #                 self.up_calls = []
-    #                 self.direction = Elevator.UP
-    #
-    #
-    #
-    #     elif not self.active_calls:
-    #         if self.up_calls and self.up_calls[0] < self.elevator_pos:
-    #             self.add(self.active_calls, self.up_calls[0])
-    #         elif self.up_calls and self.up_calls[0] >= self.elevator_pos:
-    #             self.active_calls = self.up_calls
-    #             self.up_calls = []
-    #             self.direction = Elevator.UP
-    #
-    #         elif not self.up_calls:
-    #             if self.down_calls and self.down_calls[0] > self.elevator_pos:
-    #                 self.add(self.active_calls, self.down_calls[0])
-    #
-    #             elif self.down_calls and self.down_calls[0] <= self.elevator_pos:
-    #                 self.active_calls = self.down_calls
-    #                 self.down_calls = []
-    #                 self.direction = Elevator.DOWN
-    #
-    # def get_next(self):
-    #     while self.active_calls and self.active_calls[0] == self.elevator_pos:
-    #         self.active_calls.pop(0)
-    #
-    #     if not self.active_calls:
-    #         if self.to_dst is not None :
-    #             self.add(self.active_calls,self.to_dst)
-    #             self.to_dst = None
-    #         else:
-    #             self.feed_calls()
-    #
-    #     while self.active_calls and self.active_calls[0] == self.elevator_pos:
-    #         self.active_calls.pop(0)
-    #
-    #     if not self.active_calls:
-    #         self.direction = Elevator.LEVEL
-    #         return None
-    #
-    #     if self.elevator_pos >= self.active_calls[0]:
-    #         self.direction = Elevator.DOWN
-    #     else:
-    #         self.direction = Elevator.UP
-    #
-    #     # print(f'next is {self.active_calls[0]} direction {self.direction}')
-    #     return self.active_calls[0]
-
-
-
-
-
-
-
-
-    def get_min_dest_up_calls(elv_pos = None):
-        picked = None
         if elv_pos is not None:
-            for c in cs:
-                if c.direction == 1 and c.src == elv_pos:
-                    c.picked = True
+            calls_up = []
+            for c in self.calls:
+                if c.direction == Elevator.UP and c.src >= elv_pos and not c.picked:
+                    calls_up.append(c.src)
 
-                if c.direction == 1 and c.src > elv_pos and picked is None:
-                    picked = c
+                if c.direction == Elevator.UP and c.dest >= elv_pos and c.picked:
+                    calls_up.append(c.dest)
 
-                elif c.src > elv_pos and c.src < picked.src:
-                    picked = c
+            calls_up.sort()
+            if not calls_up:
+                return None
+            return calls_up[0]
         else:
-            for c in cs:
-                if c.direction == 1 and c.src == elv_pos:
-                    c.picked = True
+            calls_up = []
+            for c in self.calls:
+                if c.direction == Elevator.UP and not c.picked:
+                    calls_up.append(c.src)
 
-                if c.direction == 1 and picked is None:
-                    picked = c
+                if c.direction == Elevator.UP and c.picked:
+                    calls_up.append(c.dest)
 
-                elif c.src < picked.src:
-                    picked = c
-        return picked
+            calls_up.sort()
+            if not calls_up:
+                return None
+            return calls_up[0]
 
-    def get_min_dest_down_calls(elv_pos = None):
-        picked = None
+    def get_next_down_calls(self, elv_pos=None):
+        for c in self.calls:
+            if c.direction == Elevator.DOWN and c.src == self.elevator_pos:
+                c.picked = True
+                c.src_time = self.time
+
         if elv_pos is not None:
-            for c in cs:
-                if c.direction == -1 and c.src == elv_pos:
-                    c.picked = True
-                if c.direction == -1 and c.src < elv_pos and picked is None:
-                    picked = c
+            calls_up = []
+            for c in self.calls:
+                if c.direction == Elevator.DOWN and c.src <= elv_pos and not c.picked:
+                    calls_up.append(c.src)
 
-                elif c.direction == -1 and c.src < elv_pos and c.src > picked.src:
-                    picked = c
+                if c.direction == Elevator.DOWN and c.dest <= elv_pos and c.picked:
+                    calls_up.append(c.dest)
 
+            calls_up.sort(reverse=True)
+            if not calls_up:
+                return None
+            return calls_up[0]
         else:
-            for c in cs:
-                if c.direction == -1 and c.src == elv_pos:
-                    c.picked = True
+            calls_up = []
+            for c in self.calls:
+                if c.direction == Elevator.DOWN and not c.picked:
+                    calls_up.append(c.src)
 
-                if c.direction == -1 and picked is None:
-                    picked = c
+                if c.direction == Elevator.DOWN and c.picked:
+                    calls_up.append(c.dest)
 
-                elif c.direction == -1 and c.src > picked.src:
-                    picked = c
-        return picked
+            calls_up.sort(reverse=True)
+            if not calls_up:
+                return None
+            return calls_up[0]
 
+    def get_next(self):
+        if not self.calls:
+            self.direction = Elevator.LEVEL
+            return None
 
+        for c in self.calls:
+            if c.picked and self.elevator_pos == c.dest:
+                self.calls.remove(c)
+                c.dest_time = self.time
 
-    def get_next(self,direction, elv_pos):
-        for c in cs:
-            if c.picked and elv_pos == c.dest:
-                cs.remove(c)
-        if direction == 1:
-            dd = self.get_min_dest_up_calls(elv_pos)
+        if self.direction == Elevator.UP:
+            dd = self.get_next_up_calls(self.elevator_pos)
             if dd is None:
-                dd = self.get_min_dest_down_calls()
+                dd = self.get_next_down_calls()
             if dd is None:
-                dd = self.get_min_dest_up_calls()
+                dd = self.get_next_up_calls()
+            if dd is None:
+                return None
         else:
-            dd = get_min_dest_down_calls(elv_pos)
+            dd = self.get_next_down_calls(self.elevator_pos)
             if dd is None:
-                dd = get_min_dest_up_calls()
+                dd = self.get_next_up_calls()
             if dd is None:
-                dd = get_min_dest_down_calls()
+                dd = self.get_next_down_calls()
+            if dd is None:
+                return None
+
+        if dd is not None:
+            if dd >= self.elevator_pos:
+                self.direction = Elevator.UP
+            else:
+                self.direction = Elevator.DOWN
 
         return dd
 
-
-
-
-
-
-
-
-
-
-
     def cmd(self):
         next = self.get_next()
+        while next is not None and next == self.elevator_pos:
+            next = self.get_next()
+        # print(f'next is {next}')
         # print(f'current floor is {self.elevator_pos}   direction {self.direction}')
 
         if next is None:
             return
-
-        if self.elevator_pos == next:
-            self.active_calls.pop(0)
 
         if self.direction == Elevator.UP and self.elevator_pos < self.elevator.max_floor:
             if self.elevator_pos + self.elevator.speed >= next:
@@ -255,24 +147,35 @@ class simulator:
             else:
                 self.elevator_pos -= self.elevator.speed
 
-    def get_elevator_state_at(self, time, calls: []):
-        i = 0
-        # print(f'simulation starting start pos {self.elevator_pos}  start direction {self.direction}')
-        new_calls = calls.copy()
+    def get_elevator_state_at(self, till_time, calls: [], new_call : Call):
+        # print(f'simulation starting start pos {self.elevator_pos}  start direction {self.direction} elevator {self.elevator.id}')
+        last_elevator_level = []
 
-        while i < time:
+        while self.time < till_time:
             # print('-----')
-            for c in new_calls:
-                if c.time_coming <= i:
-                    self.add(c)
-                    new_calls.remove(c)
+            if self.direction == Elevator.LEVEL:
+                last_elevator_level.append(self.time)
 
-            # print(self.active_calls)
-            # print('up calls ', self.up_calls)
-            # print('down calls', self.down_calls)
+            if new_call.dest_time is not None and self.direction == Elevator.LEVEL:
+                x = last_elevator_level[len(last_elevator_level)-2]
+                print(self.time,x)
+                return self.time - x
+
+            for c in calls:
+                if c.time_coming <= self.time:
+                    self.add(c)
+                    calls.remove(c)
+
+            # print('[')
+            # for c in self.calls:
+            #     print(f'{c.src} -> {c.dest} , ')
+            # print(']')
 
             self.cmd()
             # print('-----')
-            i += 1
+            self.time += 1
 
-        return (self.calls , self.elevator_pos, self.get_next(), self.direction)
+        if new_call.dest_time is None:
+            return sys.maxsize
+
+        return self.time - new_call.time_coming
