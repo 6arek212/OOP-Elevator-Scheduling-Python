@@ -1,5 +1,5 @@
 from models.elevator import Elevator
-from simulator import simulator
+from simulator import Simulator
 
 
 class ElevatorManager:
@@ -21,7 +21,7 @@ class ElevatorManager:
         new_calls = self.calls.copy()
         new_calls.append(c)
         new_calls.sort()
-        s = simulator(self.elevator)
+        s = Simulator(self.elevator)
         time = s.start_simulation(self.time_for_sim, new_calls.copy(), c)
 
         for c in new_calls:

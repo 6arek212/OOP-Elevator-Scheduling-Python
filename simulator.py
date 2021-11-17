@@ -4,7 +4,7 @@ from models.elevator import Elevator
 from models.call import Call
 
 
-class simulator:
+class Simulator:
     '''
         this a simulator to mimc the tester behavior
         using the Elevator Algorithm
