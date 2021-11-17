@@ -8,7 +8,7 @@ import csv
 
 if __name__ == '__main__':
     buildings = Building.init_from_file('./data/Ex1_input/Ex1_Buildings/B5.json')
-    calls = Call.init_from_file('./data/Ex1_input/Ex1_Calls/Calls_d.csv')
+    calls = Call.init_from_file('./data/Ex1_input/Ex1_Calls/Calls_c.csv')
     elevator_manager = []
     calls.sort()
     time_for_sim = calls[len(calls) - 1].time_coming + 120
