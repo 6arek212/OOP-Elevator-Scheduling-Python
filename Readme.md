@@ -27,9 +27,9 @@ in a way that minimizes the average waiting time.
 
 ## How to RUN 
 
-###`In the cmd : `
+`In the cmd : `
 
-###`python Ex1.py B1.json C2.csv out.csv`
+`python Ex1.py B1.json C2.csv out.csv`
 </br>
 
 **C2 - Elevator calls .csv file** 
