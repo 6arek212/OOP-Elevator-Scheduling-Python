@@ -1,0 +1,34 @@
+Total waiting time: 35514.0,  average waiting time per call: 35.514,  unCompleted calls,0,  certificate, -4292064     B5 ,d
+
+Total waiting time: 35160.0,  average waiting time per call: 35.16,  unCompleted calls,0,  certificate, -4292064      B5,c
+
+Total waiting time: 35793.0,  average waiting time per call: 35.793,  unCompleted calls,0,  certificate, -4292064      B5,b
+
+Total waiting time: 1140.0,  average waiting time per call: 11.4,  unCompleted calls,0,  certificate, -87464856      B5.a
+
+
+Total waiting time: 185141.0,  average waiting time per call: 185.141,  unCompleted calls,0,  certificate, -560032254  B4.d
+
+Total waiting time: 194661.190305,  average waiting time per call: 194.661190305,  unCompleted calls,1,  certificate, -547072930  B4.c
+
+Total waiting time: 179450.19023999994,  average waiting time per call: 179.45019023999993,  unCompleted calls,5,  certificate, -598545310 B4.b
+
+Total waiting time: 1659.0,  average waiting time per call: 16.59,  unCompleted calls,0,  certificate, -71181303  B4.a
+
+
+
+Total waiting time: 2808.0,  average waiting time per call: 28.08,  unCompleted calls,0,  certificate, -45504211  B3.a
+
+Total waiting time: 525721.9247360025,  average waiting time per call: 525.7219247360025,  unCompleted calls,182,  certificate, -1811929769  B3.b
+
+Total waiting time: 571533.9371450036,  average waiting time per call: 571.5339371450036,  unCompleted calls,89,  certificate, -1928196549  B3.c
+
+Total waiting time: 514920.2992340027,  average waiting time per call: 514.9202992340028,  unCompleted calls,99,  certificate, -1856946932  B3.d
+
+
+Total waiting time: 5037.0,  average waiting time per call: 50.37,  unCompleted calls,0,  certificate, -222270577      B2.a
+
+Total waiting time: 11292.0,  average waiting time per call: 112.92,  unCompleted calls,0,  certificate, -276335255   B1.a
+
+
+
