@@ -178,7 +178,7 @@ class Simulator:
                     self.time += self.elevator.close_time + self.elevator.start_time
                 self.elevator_pos -= self.elevator.speed
 
-    def start_simulation(self, till_time, calls: [], new_call: Call):
+    def start_simulation(self, till_time, calls: [Call], new_call: Call):
         '''
             spining up the simulation
         :param till_time: the time till the simulation end
