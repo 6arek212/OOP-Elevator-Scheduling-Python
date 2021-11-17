@@ -10,20 +10,20 @@ class Call:
         self.type = type
         self.allocated_to = -1
         self.time_coming = time_coming
-        self.time_going_src = -1
-        self.time_going_dest = -1
-        self.time_done = -1
         self.allocated_to = -1
+        self.picked = False
+        self.src_time = None
+        self.dest_time = None
         if src <= dest:
             self.direction = Elevator.UP
         else:
             self.direction = Elevator.DOWN
 
     def __str__(self):
-        return f'src {self.src} ,dest {self.dest} , type {self.type}  , allocated_to {self.allocated_to}'
+        return f'src {self.src} ,dest {self.dest} , type {self.type}  , allocated_to {self.allocated_to} , picked {self.picked}'
 
     def __repr__(self):
-        return f'{{ src {self.src} ,dest {self.dest} , type {self.type}  , allocated_to {self.allocated_to} , time {self.time_coming} }}'
+        return f'{{ src {self.src} ,dest {self.dest} , type {self.type}  , allocated_to {self.allocated_to} , time {self.time_coming} , picked {self.picked} }}'
 
     def __dict__(self):
         return [
@@ -36,7 +36,7 @@ class Call:
         ]
 
     def __lt__(self, other):
-        return self.time_coming > other.time_coming
+        return self.time_coming < other.time_coming
 
     @staticmethod
     def init_from_file(filepath):
