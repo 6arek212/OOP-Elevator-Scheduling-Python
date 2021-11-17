@@ -34,14 +34,20 @@ in a way that minimizes the average waiting time.
 `In the cmd : `
 
     python Ex1.py B1.json C2.csv out.csv
+
 </br>
+
+#### Example:
+
+    python3 Ex1.py B5.json Calls_d.csv out_file
+
 
 
 **C2 - Elevator calls .csv file** 
 </br>
 **B1 - Building json file**
 
-    example: python3 Ex1.py B5.json Calls_d.csv out_file
+
 
 </br>
 
