@@ -1,7 +1,7 @@
 import sys
 
-from .elevator import Elevator
-from .call import Call
+from models.elevator import Elevator
+from models.call import Call
 
 
 class simulator:
@@ -18,7 +18,6 @@ class simulator:
         self.time = 0
 
     def add(self, c: Call):
-        # print(f'call got added {c.src} --> {c.dest}  direction {c.direction}')
         if self.direction == Elevator.LEVEL:
             if c.src == self.elevator_pos:
                 self.direction = c.direction
@@ -106,16 +105,11 @@ class simulator:
                 return None
             return calls_down[0]
 
-
-
-
-
     def get_next(self):
         '''
         :return: next destination
         '''
         if not self.calls:
-            # self.direction = Elevator.LEVEL
             return None
 
         for c in self.calls:
@@ -139,15 +133,7 @@ class simulator:
                 dd = self.get_next_down_calls()
             if dd is None:
                 return None
-
-        # if dd is not None:
-        #     if dd >= self.elevator_pos:
-        #         self.direction = Elevator.UP
-        #     else:
-        #         self.direction = Elevator.DOWN
         return dd
-
-
 
     def cmd(self):
         '''
@@ -158,9 +144,6 @@ class simulator:
         next = self.get_next()
         while next is not None and next == self.elevator_pos:
             next = self.get_next()
-        # print(f'next is {next}')
-        # print(f'current floor is {self.elevator_pos}   direction {self.direction}')
-
 
         start_time = False
 
@@ -175,8 +158,6 @@ class simulator:
                 self.direction = Elevator.UP
             else:
                 self.direction = Elevator.DOWN
-
-
 
         if self.direction == Elevator.UP and self.elevator_pos < self.elevator.max_floor:
             if self.elevator_pos + self.elevator.speed >= next:
@@ -197,9 +178,6 @@ class simulator:
                     self.time += self.elevator.close_time + self.elevator.start_time
                 self.elevator_pos -= self.elevator.speed
 
-
-
-
     def start_simulation(self, till_time, calls: [], new_call: Call):
         '''
             spining up the simulation
@@ -208,14 +186,11 @@ class simulator:
         :param new_call: the new call to evaluate
         :return: the time from the latest Elevator stop to the next Elevator stop and the new call is Done
         '''
-        # print(f'simulation starting start pos {self.elevator_pos}  start direction {self.direction} elevator {self.elevator.id}')
         last_elevator_level = []
 
         while self.time < till_time:
-            # print('-----')
             if self.direction == Elevator.LEVEL:
                 last_elevator_level.append(self.time)
-
 
             if new_call.dest_time is not None and self.direction == Elevator.LEVEL:
                 x = last_elevator_level[len(last_elevator_level) - 2]
@@ -225,14 +200,7 @@ class simulator:
                 if c.time_coming <= self.time:
                     self.add(c)
                     calls.remove(c)
-
-            # print('[')
-            # for c in self.calls:
-            #     print(f'{c.src} -> {c.dest} , ')
-            # print(']')
-
             self.cmd()
-            # print('-----')
             self.time += 1
 
         if new_call.dest_time is None:

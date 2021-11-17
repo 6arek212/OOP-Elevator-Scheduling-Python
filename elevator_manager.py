@@ -1,8 +1,5 @@
-import sys
-
-from .elevator import Elevator
-from models.simulator import simulator
-from models.call import Call
+from models.elevator import Elevator
+from simulator import simulator
 
 
 class ElevatorManager:
@@ -16,13 +13,11 @@ class ElevatorManager:
         self.calls.append(c)
 
 
-    def estimated_time_to(self, c):
+    def estimated_time_with(self, c):
         '''
         :param c: call to evaluate
-        :return: the estimated time for the elevator to finish this call
+        :return: the estimated time that this call adds to the overall elevator time
         '''
-
-
         new_calls = self.calls.copy()
         new_calls.append(c)
         new_calls.sort()
