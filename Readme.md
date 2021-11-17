@@ -52,7 +52,7 @@ in a way that minimizes the average waiting time.
 </br>
 
 ## Test Results
-    `java -jar Ex1_checker_V1.2_obf.jar 1111,2222,3333 B2.json Ex1_Calls_case_2_b.csv out.log`
+    java -jar Ex1_checker_V1.2_obf.jar 1111,2222,3333 B2.json Ex1_Calls_case_2_b.csv out.log
 
 
 
