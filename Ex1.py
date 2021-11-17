@@ -18,7 +18,6 @@ if __name__ == '__main__':
         print('you need to provide the file names of <Building.json> <Calls.csv> <output.csv>')
         has_input = False
 
-
     if has_input:
         buildings = Building.init_from_file(f'./data/Ex1_input/Ex1_Buildings/{building_file_name}')
         calls = Call.init_from_file(f'./data/Ex1_input/Ex1_Calls/{calls_file_name}')
