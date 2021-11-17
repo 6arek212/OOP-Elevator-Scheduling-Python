@@ -21,7 +21,9 @@ in a way that minimizes the average waiting time.
 
 </br>
 
+###Project Structure
 
+![img.png](img.png)
 
 
 

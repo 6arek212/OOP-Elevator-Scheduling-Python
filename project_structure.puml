@@ -1,0 +1,71 @@
+@startuml
+
+class Simulator{
+        elevator = elevator
+        elevator_pos = 0
+        direction = Elevator.LEVEL
+        calls = []
+        time = 0
+
+}
+ElevatorManager  *--*  Simulator
+
+
+
+class ElevatorManager{
+       elevator
+       calls
+       time_for_sim
+       def add(call)
+       def estimated_time_with(call)
+}
+
+ElevatorManager "1" *--* "1" Building
+
+
+
+class Call{
+        src
+        dest
+        type
+        allocated_to
+        time_coming
+        allocated_to
+        picked
+        src_time
+        dest_time
+        direction
+        def init_from_file(filepath)->[Call]
+}
+ElevatorManager "1" *--* "many" Call
+
+
+
+class Building{
+     elevators
+     max_floor
+     min_floor
+     def init_from_file(filepath)-> Building
+}
+
+
+
+
+
+
+Building "1" *-- "many" Elevator
+
+
+class Elevator{
+        id
+        speed
+        min_floor
+        max_floor
+        close_time
+        open_time
+        start_time
+        stop_time
+}
+
+@enduml
+

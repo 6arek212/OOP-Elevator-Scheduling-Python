@@ -12,9 +12,6 @@ class Elevator:
         self.open_time = open_time
         self.start_time = start_time
         self.stop_time = stop_time
-        self.start_direction = None
-        self.position = 0
-        self.state = Elevator.LEVEL
 
     def __str__(self):
         return f"id : {self.id} ,\n speed : {self.speed} ,\n min_floor : {self.min_floor} ," \
@@ -24,5 +21,3 @@ class Elevator:
         return f"id : {self.id} ,\n speed : {self.speed} ,\n min_floor : {self.min_floor} ," \
                f"\n max_floor:{self.max_floor}"
 
-    def go_to(self, dest):
-        pass
