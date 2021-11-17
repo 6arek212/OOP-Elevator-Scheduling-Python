@@ -17,21 +17,22 @@ class ElevatorManager:
 
 
     def estimated_time_to(self, c):
-        # print('--------------')
+        '''
+        :param c: call to evaluate
+        :return: the estimated time for the elevator to finish this call
+        '''
+
+
         new_calls = self.calls.copy()
         new_calls.append(c)
         new_calls.sort()
         s = simulator(self.elevator)
-        time = s.get_elevator_state_at(self.time_for_sim, new_calls.copy(), c)
-
-        # print(f'time for simulation {time}',self.time_for_sim)
-        # print('--------------')
+        time = s.start_simulation(self.time_for_sim, new_calls.copy(), c)
 
         for c in new_calls:
             c.picked = False
             c.src_time = None
             c.dest_time = None
-
 
         return time
 
