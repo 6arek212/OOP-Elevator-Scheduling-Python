@@ -23,6 +23,8 @@ in a way that minimizes the average waiting time.
 
 ###Project Structure
 
+</br>
+
 ![img.png](img.png)
 
 
