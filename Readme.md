@@ -18,8 +18,8 @@ in a way that minimizes the average waiting time.
 - elevator movement simulation
 - parse json/csv files 
 
-
 </br>
+
 
 ###Project Structure
 
