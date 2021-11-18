@@ -1,4 +1,6 @@
 import json
+import unittest
+
 from models.elevator import Elevator
 
 
@@ -33,3 +35,9 @@ class Building:
                 }
                 building['elevators'].append(Elevator(**el))
         return Building(**building)
+
+
+
+
+
+

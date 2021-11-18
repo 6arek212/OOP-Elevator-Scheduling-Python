@@ -6,7 +6,6 @@ from models.building import Building
 import csv
 
 if __name__ == '__main__':
-    print()
 
     has_input = True
 
