@@ -25,7 +25,7 @@ in a way that minimizes the average waiting time.
 
 </br>
 
-![img.png](img.png)
+![img.png](uml/img.png)
 
 
 

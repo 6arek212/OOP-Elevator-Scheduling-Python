@@ -32,7 +32,7 @@ if __name__ == '__main__':
 
         def allocate_call(call):
             if call.dest > buildings.max_floor or call.dest < buildings.min_floor:
-                raise Exception('out of floor range')
+                raise Exception('Error , floor is not in the building range , choose a different calls set ')
             picked = 0
             picked_sim = elevator_manager[picked].estimated_time_with(call)
             for el in range(1, len(buildings.elevators)):
