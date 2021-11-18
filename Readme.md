@@ -82,7 +82,7 @@ Being an offline algorithm all the elevator calls are given from the start
 ### Elevator scheduling
 Idea : Keep moving in one direction until possible, then reverse direction , 
 
-**This scheduling method was used in the simulator**
+- **This scheduling method was used in the simulator**
 
 
 
