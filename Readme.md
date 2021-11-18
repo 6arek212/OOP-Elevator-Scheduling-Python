@@ -105,6 +105,7 @@ Idea : Keep moving in one direction until possible, then reverse direction ,
 ## References
     
 https://towardsdatascience.com/elevator-optimization-in-python-73cab894ad30
+
 https://www.quora.com/What-are-ways-to-optimize-the-service-algorithm-for-an-elevator
 
 
