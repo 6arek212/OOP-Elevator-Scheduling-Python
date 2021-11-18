@@ -69,15 +69,20 @@ in a way that minimizes the average waiting time.
 
 ## Algorithm Breakdown
 
+### Allocation algorithm (offline algorithm)
+Being an offline algorithm all the elevator calls are given from the start
 
-### Allocation algorithm
+
+####How it works ? 
 - Picking the elevator with the best time to get to the given call , taking in considiration the elevator current calls.
 - To accomplish the above ,A simulator was used to mimic the elevator behavior and providing the elevator status at a certain time
   
 </br>
 
 ### Elevator scheduling
-Idea : Keep moving in one direction until possible, then reverse direction 
+Idea : Keep moving in one direction until possible, then reverse direction , 
+
+**This scheduling method was used in the simulator**
 
 
 
