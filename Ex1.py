@@ -45,9 +45,7 @@ if __name__ == '__main__':
 
 
         for call in calls:
-            x = allocate_call(call)
-            if x is not None:
-                call.allocated_to = x
+            call.allocated_to = allocate_call(call)
 
         print('Done')
 
