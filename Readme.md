@@ -73,7 +73,7 @@ in a way that minimizes the average waiting time.
 Being an offline algorithm all the elevator calls are given from the start
 
 
-####How it works ? 
+#### How it works ? 
 - Picking the elevator with the best time to get to the given call , taking in considiration the elevator current calls.
 - To accomplish the above ,A simulator was used to mimic the elevator behavior and providing the elevator status at a certain time
   
