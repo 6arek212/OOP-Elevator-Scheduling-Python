@@ -15,13 +15,14 @@ class Simulator:
         self.elevator_pos = 0
         self.direction = Elevator.LEVEL
         self.calls = []
-        self.time = 0
+        self.time = 0.0
+        self.is_going_to_move = False
 
     def add(self, c: Call):
         if self.direction == Elevator.LEVEL:
             if c.src == self.elevator_pos:
                 self.direction = c.direction
-            if c.src > self.elevator_pos:
+            elif c.src > self.elevator_pos:
                 self.direction = Elevator.UP
             else:
                 self.direction = Elevator.DOWN
@@ -116,6 +117,7 @@ class Simulator:
             if c.picked and self.elevator_pos == c.dest:
                 self.calls.remove(c)
                 c.dest_time = self.time
+                self.is_going_to_move =True
 
         if self.direction == Elevator.UP:
             dd = self.get_next_up_calls(self.elevator_pos)
@@ -145,37 +147,40 @@ class Simulator:
         while next is not None and next == self.elevator_pos:
             next = self.get_next()
 
-        start_time = False
+
 
         if next is None:
             self.direction = Elevator.LEVEL
             return
         else:
-            if next == Elevator.LEVEL:
-                start_time = True
-
             if next > self.elevator_pos:
                 self.direction = Elevator.UP
             else:
                 self.direction = Elevator.DOWN
 
+
+
+
+
         if self.direction == Elevator.UP and self.elevator_pos < self.elevator.max_floor:
+            if self.is_going_to_move:
+                self.time += self.elevator.close_time + self.elevator.start_time
+
             if self.elevator_pos + self.elevator.speed >= next:
                 self.time += self.elevator.stop_time + self.elevator.open_time
                 self.elevator_pos = next
             else:
-                if start_time:
-                    self.time += self.elevator.close_time + self.elevator.start_time
                 self.elevator_pos += self.elevator.speed
 
 
         elif self.direction == Elevator.DOWN and self.elevator_pos > self.elevator.min_floor:
+            if self.is_going_to_move:
+                self.time += self.elevator.close_time + self.elevator.start_time
+
             if self.elevator_pos - self.elevator.speed <= next:
                 self.time += self.elevator.stop_time + self.elevator.open_time
                 self.elevator_pos = next
             else:
-                if start_time:
-                    self.time += self.elevator.close_time + self.elevator.start_time
                 self.elevator_pos -= self.elevator.speed
 
     def start_simulation(self, till_time, calls: [Call], new_call: Call):
@@ -187,11 +192,10 @@ class Simulator:
         :return: the time from the latest Elevator stop to the next Elevator stop and the new call is Done
         '''
         last_elevator_level = []
-
         while self.time < till_time:
             if self.direction == Elevator.LEVEL:
                 last_elevator_level.append(self.time)
-
+                self.is_going_to_move = True
             if new_call.dest_time is not None and self.direction == Elevator.LEVEL:
                 x = last_elevator_level[len(last_elevator_level) - 2]
                 return self.time - x
@@ -201,7 +205,8 @@ class Simulator:
                     self.add(c)
                     calls.remove(c)
             self.cmd()
-            self.time += 1
+            self.is_going_to_move = False
+            self.time += 1.0
 
         if new_call.dest_time is None:
             return sys.maxsize

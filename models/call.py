@@ -23,7 +23,7 @@ class Call:
         return f'src {self.src} ,dest {self.dest} , type {self.type}  , allocated_to {self.allocated_to} , picked {self.picked}'
 
     def __repr__(self):
-        return f'{{ src {self.src} ,dest {self.dest} , type {self.type}  , allocated_to {self.allocated_to} , time {self.time_coming} , picked {self.picked} }}'
+        return f'{{ src {self.src} ,dest {self.dest} , type {self.type}  , allocated_to {self.allocated_to} , time {self.time_coming} , picked {self.picked} ,  direction {self.direction}  }}'
 
     def __dict__(self):
         return [
