@@ -71,8 +71,9 @@ in a way that minimizes the average waiting time.
 
 
 ### Allocation algorithm
-- Picking the elevator with the best time to get to the given call , taking in considiration the elevator current calls 
-
+- Picking the elevator with the best time to get to the given call , taking in considiration the elevator current calls.
+- To accomplish the above ,A simulator was used to mimic the elevator behavior and providing the elevator status at a certain time
+  
 </br>
 
 ### Elevator scheduling
